@@ -16,10 +16,7 @@ d3.json(
 
   const yScale = d3
     .scaleTime()
-    .domain([
-      d3.min(dataset, (d) => new Date(0, d.month - 1, 1)),
-      d3.max(dataset, (d) => new Date(0, d.month - 1, 1)),
-    ])
+    .domain([new Date(0, 0, 1), new Date(0, 11, 31)])
     .range([padding, height - padding]);
 
   const colorScale = d3
@@ -41,6 +38,10 @@ d3.json(
       "#67001f",
     ]);
 
+  const rectWidth =
+    (width - 2 * padding) /
+    (d3.max(dataset, (d) => d.year) - d3.min(dataset, (d) => d.year));
+
   svg
     .selectAll("rect")
     .data(dataset)
@@ -52,19 +53,19 @@ d3.json(
     .attr("data-temp", (d) => data.baseTemperature + d.variance)
     .attr("x", (d) => xScale(d.year))
     .attr("y", (d) => yScale(new Date(0, d.month - 1, 1)))
-    .attr("width", 4)
+    .attr("width", rectWidth)
     .attr("height", (height - 2 * padding) / 12)
     .attr("fill", (d) => colorScale(d.variance))
     .on("mouseover", function (d) {
       d3.select("#tooltip")
-        .style("visibility", "visible")
+        .style("display", "block") // Show the tooltip
         .style("left", d3.event.pageX + "px") // Set the x position of the tooltip
         .style("top", d3.event.pageY + "px") // Set the y position of the tooltip
         .text(`Year: ${d.year}, Temp: ${data.baseTemperature + d.variance}℃`)
         .attr("data-year", d.year); // Set the data-year attribute of the tooltip
     })
     .on("mouseout", function () {
-      d3.select("#tooltip").style("visibility", "hidden"); // Hide the tooltip
+      d3.select("#tooltip").style("display", "none"); // Hide the tooltip
     });
 
   const xAxis = d3.axisBottom(xScale).tickFormat(d3.format("d"));
