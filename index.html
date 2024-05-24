@@ -1,59 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Heat Map</title>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      #title {
-        margin-top: 20px;
-        text-align: center;
-      }
-
-      #description {
-        margin: 10px auto;
-        width: 50%;
-        text-align: center;
-      }
-
-      #heatmap,
-      #legend {
-        margin: 20px auto;
-      }
-
-      #tooltip {
-        position: absolute;
-        padding: 10px;
-        background-color: white;
-        border: 1px solid black;
-        border-radius: 5px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.1s ease-in;
-      }
-
-      .cell:hover {
-        stroke: black;
-      }
+      /* Add your CSS here */
     </style>
   </head>
   <body>
-    <h1 id="title">Global Temperature Heat Map</h1>
-    <p id="description">Heat map description...</p>
+    <h1 id="title">Heat Map</h1>
+    <p id="description">A heat map representing global temperature data</p>
     <svg id="heatmap"></svg>
     <div id="tooltip"></div>
-    <svg id="legend"></svg>
     <script src="https://cdn.freecodecamp.org/testable-projects-fcc/v1/bundle.js"></script>
-    <script src="https://d3js.org/d3.v5.min.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
